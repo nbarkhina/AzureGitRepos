@@ -2,7 +2,7 @@
 	"name": "gitdownloadazurerepos",
 	"displayName": "Azure Git Repos",
 	"description": "Download your Git Code from Azure Repos",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"publisher": "neilbarkhina",
 	"license": "MIT",
 	"engines": {
@@ -31,7 +31,7 @@
 	],
 	"icon": "images/icon.png",
 	"galleryBanner": {
-		"color": "#CCCCCC",
+		"color": "#eff1f3",
 		"theme": "light"
 	  },
 	"main": "./out/extension.js",
