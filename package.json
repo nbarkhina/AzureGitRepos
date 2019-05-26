@@ -1,0 +1,80 @@
+{
+	"name": "gitdownloadazurerepos",
+	"displayName": "Azure Git Repos",
+	"description": "Download your Git Repos from Azure Repos",
+	"version": "1.0.3",
+	"publisher": "neilbarkhina",
+	"engines": {
+		"vscode": "^1.28.0"
+	},
+	"repository": "https://github.com/nbarkhina",
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"icon": "images/icon.png",
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.azuregit.downloadRepo",
+				"title": "Download Repo",
+				"category": "Azure Git Repos"
+			},
+			{
+				"command": "extension.azuregit.initialize",
+				"title": "Initialize",
+				"category": "Azure Git Repos"
+			},
+			{
+				"command": "extension.azuregit.logout",
+				"title": "Logout",
+				"category": "Azure Git Repos"
+			}
+		],
+		"configuration":{
+			"title": "Azure Git Configuration",
+			"properties": {
+				"azuregit.settings.command1": {
+					"type": "string",
+					"default": "git init",
+					"description": "Customize the commands that run to download repo"
+				  },
+				  "azuregit.settings.command2": {
+					"type": "string",
+					"default": "git remote add origin",
+					"description": "Customize the commands that run to download repo"
+				  },
+				  "azuregit.settings.command3": {
+					"type": "string",
+					"default": "git pull origin master",
+					"description": "Customize the commands that run to download repo"
+				  },
+				  "azuregit.settings.showStatusBar": {
+					"type": "boolean",
+					"default": true,
+					"description": "Display Azure Git button on Status Bar"
+				  }
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"typescript": "^3.3.1",
+		"vscode": "^1.1.28",
+		"tslint": "^5.12.1",
+		"@types/node": "^10.12.21",
+		"@types/mocha": "^2.2.42"
+	},
+	"dependencies": {
+		"axios": "^0.18.0"
+	}
+}
