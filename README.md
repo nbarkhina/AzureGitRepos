@@ -18,7 +18,7 @@ To setup the extension start by adding your Organization name and Personal Acces
 
 Generate your Personal Access Token from your Azure DevOps site
 
-![Azure Repos PAT](images/pat.jpg)
+![Azure Repos PAT](images/access_token.jpg)
 
 
 ## Extension Settings
@@ -37,7 +37,7 @@ Set whether you want the Download Repo button to appear at the bottom of VS Code
 
 * `azuregit.settings.showStatusBar`
 
-![Azure Repos Button](images/status_bar.jpg)
+![Azure Repos Button](images/bar.jpg)
 
 ## Requirements
 
