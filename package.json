@@ -1,20 +1,39 @@
 {
 	"name": "gitdownloadazurerepos",
 	"displayName": "Azure Git Repos",
-	"description": "Download your Git Repos from Azure Repos",
-	"version": "1.0.3",
+	"description": "Download your Git Code from Azure Repos",
+	"version": "1.0.4",
 	"publisher": "neilbarkhina",
+	"license": "MIT",
 	"engines": {
 		"vscode": "^1.28.0"
 	},
-	"repository": "https://github.com/nbarkhina",
+	"bugs": {
+		"url": "https://github.com/nbarkhina/AzureGitRepos/issues",
+		"email": "neil@barkhina.com"
+	  },
+	"repository": 
+	{
+		"type": "git",
+    	"url": "https://github.com/nbarkhina/AzureGitRepos"
+	},
 	"categories": [
 		"Other"
 	],
+	"keywords": [
+    "azure repos",
+    "azure devops",
+    "git",
+    "azure git repos"
+  ],
 	"activationEvents": [
 		"*"
 	],
 	"icon": "images/icon.png",
+	"galleryBanner": {
+		"color": "#CCCCCC",
+		"theme": "light"
+	  },
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
