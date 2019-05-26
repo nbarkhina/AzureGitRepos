@@ -1,6 +1,6 @@
 # Azure Git Repos Extension
 
-This is a simple to use extension to easily download your Git Repos by navigating your Projects from the Command Bar. One of the most frustrating parts of downloading your Git code is remembering those pesky remote URLS. This extension makes it so you never have to memorize a URL again! Only supports Git projects hosted in Azure Repos.
+This is a simple to use VS Code extension to easily download your Git Repos by navigating your Projects from the Command Bar. One of the most frustrating parts of downloading your Git code is remembering those pesky remote URLS. This extension makes it so you never have to memorize a URL again! Only supports Git projects hosted in Azure Repos.
 
 ## Features
 
