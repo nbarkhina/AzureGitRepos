@@ -102,34 +102,46 @@ async function FindFiles(args:any,context:vscode.ExtensionContext,app:AzureGitAp
 		}
 		
 
-		let allProjects:string[] = [];
+		let allProjects:any[] = [];
 		
 		projects.data.value.forEach((item:any) => {
-			allProjects.push(item.name);
+			allProjects.push(
+				{
+					label: item.name,
+					description: item.url	
+				}
+			);
 		});
 		allProjects.sort(function (a, b) {
-			return a.toLowerCase().localeCompare(b.toLowerCase());
+			return a.label.toLowerCase().localeCompare(b.label.toLowerCase());
 		});
 	
 		var selectedProject = await vscode.window.showQuickPick(allProjects);
 		if (selectedProject)
 		{
 			projects.data.value.forEach((item:any) => {
-				if(item.name==selectedProject)
+				if(item.name==selectedProject.label)
 					selectedProject = item.id;
 			});
 		}
+		else
+			return;
 	
 		let data = await Axios.get('https://dev.azure.com/' + options.ORG + '/' + selectedProject + '/_apis/git/repositories?api-version=5.0',{
 			headers:{"Authorization":"Basic " + pat_converted}
 		});
 		console.log(data);
-		let repos:string[] = [];
+		let repos:any[] = [];
 		data.data.value.forEach((item:any) => {
-			repos.push(item.remoteUrl);
+			repos.push(
+				{
+					label: item.name,
+					description: item.remoteUrl	
+				}
+			);
 		});
 		repos.sort(function (a, b) {
-			return a.toLowerCase().localeCompare(b.toLowerCase());
+			return a.label.toLowerCase().localeCompare(b.label.toLowerCase());
 		});
 	
 		var selected = await vscode.window.showQuickPick(repos);
@@ -140,7 +152,7 @@ async function FindFiles(args:any,context:vscode.ExtensionContext,app:AzureGitAp
 			var terminal = vscode.window.createTerminal();
 			terminal.show();
 			terminal.sendText(app.command1);
-			terminal.sendText(app.command2 + ' ' + selected);
+			terminal.sendText(app.command2 + ' ' + selected.description);
 			terminal.sendText(app.command3);
 		}
 	}
