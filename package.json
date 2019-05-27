@@ -2,7 +2,7 @@
 	"name": "gitdownloadazurerepos",
 	"displayName": "Azure Git Repos",
 	"description": "Download your Git Code from Azure Repos",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"publisher": "neilbarkhina",
 	"license": "MIT",
 	"engines": {
