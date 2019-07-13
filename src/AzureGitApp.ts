@@ -6,6 +6,7 @@ export class AzureGitApp{
     command2:string = '';
     command3:string = '';
     showStatusBar:boolean = true;
+    sortByLastCommit:boolean = false;
 
     constructor(statusbar:vscode.StatusBarItem) {  
         this.statusBar = statusbar;
@@ -30,6 +31,7 @@ export class AzureGitApp{
         this.command2 = vscode.workspace.getConfiguration('azuregit.settings').get('command2') as string;
         this.command3 = vscode.workspace.getConfiguration('azuregit.settings').get('command3') as string;
         this.showStatusBar = vscode.workspace.getConfiguration('azuregit.settings').get('showStatusBar') as boolean;
+        this.sortByLastCommit = vscode.workspace.getConfiguration('azuregit.settings').get('sortByLastCommit') as boolean;
     }
     
 }

@@ -73,7 +73,24 @@ async function Initialize(args:any,context:vscode.ExtensionContext,app:AzureGitA
 	}
 }
 
+function convertCSharpDateTime(initialDate: any): Date {
+    let dateString = <string>initialDate;
+    dateString = dateString.substring(0, dateString.indexOf('T'));
+    let timeString = initialDate.substr(initialDate.indexOf("T")+1);
+    let dateComponents = dateString.split('-');
+    let timeComponents = timeString.split(':');
+    let myDate = null;
+      
+    myDate = new Date(parseInt(dateComponents[0]), parseInt(dateComponents[1]) - 1, parseInt(dateComponents[2]),
+      parseInt(timeComponents[0]),parseInt(timeComponents[1]),parseInt(timeComponents[2]));
+    
+    
+    return myDate;
+  }
+
 async function FindFiles(args:any,context:vscode.ExtensionContext,app:AzureGitApp){
+
+	app.refreshSettings();
 	
 	var options = context.globalState.get('options') as AzureGitOptions;
 	if (options)
@@ -132,27 +149,59 @@ async function FindFiles(args:any,context:vscode.ExtensionContext,app:AzureGitAp
 		});
 		console.log(data);
 		let repos:any[] = [];
-		data.data.value.forEach((item:any) => {
-			repos.push(
-				{
-					label: item.name,
-					description: item.remoteUrl	
-				}
-			);
-		});
-		repos.sort(function (a, b) {
-			return a.label.toLowerCase().localeCompare(b.label.toLowerCase());
-		});
+		for(let i = 0;i<data.data.value.length;i++){
+			let item = data.data.value[i];
+			if (app.sortByLastCommit)
+			{
+				let commit_data = await Axios.get('https://dev.azure.com/' + options.ORG + '/' + selectedProject + '/_apis/git/repositories/' + item.id + '/commits?searchCriteria.$top=1&api-version=5.0',{
+					headers:{"Authorization":"Basic " + pat_converted}
+				});
+				let date = (commit_data as any).data.value[0].author.date;
+				let dateObj = convertCSharpDateTime(date);
+				repos.push(
+					{
+						label: item.name,
+						url: item.remoteUrl,
+						description: dateObj.toLocaleDateString() + ' ' + dateObj.toLocaleTimeString(),
+						date: dateObj
+					}
+				);
+			}
+			else
+			{
+				repos.push(
+					{
+						label: item.name,
+						url: item.remoteUrl,
+						description: item.remoteUrl
+					}
+				);
+			}
+
+		}
+		
+		if (app.sortByLastCommit)
+		{
+			repos.sort(function (a, b) {
+				return b.date.getTime() - a.date.getTime()
+			});
+		}
+		else
+		{
+			repos.sort(function (a, b) {
+				return a.label.toLowerCase().localeCompare(b.label.toLowerCase());
+			});
+		}
+
 	
 		var selected = await vscode.window.showQuickPick(repos);
 		
 		if (selected)
 		{
-			app.refreshSettings();
 			var terminal = vscode.window.createTerminal();
 			terminal.show();
 			terminal.sendText(app.command1);
-			terminal.sendText(app.command2 + ' ' + selected.description);
+			terminal.sendText(app.command2 + ' ' + selected.url);
 			terminal.sendText(app.command3);
 		}
 	}

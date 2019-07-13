@@ -2,7 +2,7 @@
 	"name": "gitdownloadazurerepos",
 	"displayName": "Azure Git Repos",
 	"description": "Download your Git Code from Azure Repos",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"publisher": "neilbarkhina",
 	"license": "MIT",
 	"engines": {
@@ -11,21 +11,20 @@
 	"bugs": {
 		"url": "https://github.com/nbarkhina/AzureGitRepos/issues",
 		"email": "neil@barkhina.com"
-	  },
-	"repository": 
-	{
+	},
+	"repository": {
 		"type": "git",
-    	"url": "https://github.com/nbarkhina/AzureGitRepos"
+		"url": "https://github.com/nbarkhina/AzureGitRepos"
 	},
 	"categories": [
 		"Other"
 	],
 	"keywords": [
-    "azure repos",
-    "azure devops",
-    "git",
-    "azure git repos"
-  ],
+		"azure repos",
+		"azure devops",
+		"git",
+		"azure git repos"
+	],
 	"activationEvents": [
 		"*"
 	],
@@ -33,7 +32,7 @@
 	"galleryBanner": {
 		"color": "#eff1f3",
 		"theme": "light"
-	  },
+	},
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
@@ -53,29 +52,34 @@
 				"category": "Azure Git Repos"
 			}
 		],
-		"configuration":{
+		"configuration": {
 			"title": "Azure Git Configuration",
 			"properties": {
 				"azuregit.settings.command1": {
 					"type": "string",
 					"default": "git init",
 					"description": "Customize the commands that run to download repo"
-				  },
-				  "azuregit.settings.command2": {
+				},
+				"azuregit.settings.command2": {
 					"type": "string",
 					"default": "git remote add origin",
 					"description": "Customize the commands that run to download repo"
-				  },
-				  "azuregit.settings.command3": {
+				},
+				"azuregit.settings.command3": {
 					"type": "string",
 					"default": "git pull origin master",
 					"description": "Customize the commands that run to download repo"
-				  },
-				  "azuregit.settings.showStatusBar": {
+				},
+				"azuregit.settings.showStatusBar": {
 					"type": "boolean",
 					"default": true,
 					"description": "Display Azure Git button on Status Bar"
-				  }
+				},
+				"azuregit.settings.sortByLastCommit": {
+					"type": "boolean",
+					"default": false,
+					"description": "Sort Repos by date of last commit"
+				}
 			}
 		}
 	},
