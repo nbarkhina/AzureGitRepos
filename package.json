@@ -62,7 +62,7 @@
 				},
 				"azuregit.settings.command2": {
 					"type": "string",
-					"default": "git remote add origin",
+					"default": "git remote add origin {{URL}}",
 					"description": "Customize the commands that run to download repo"
 				},
 				"azuregit.settings.command3": {
