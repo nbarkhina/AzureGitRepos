@@ -79,6 +79,11 @@
 					"type": "boolean",
 					"default": false,
 					"description": "Sort Repos by date of last commit"
+				},
+				"azuregit.settings.downloadIntoVSCodeFolder": {
+					"type": "boolean",
+					"default": true,
+					"description": "Download the repo into the folder VS Code was opened with or if turned off will use the directory the current terminal window has open"
 				}
 			}
 		}

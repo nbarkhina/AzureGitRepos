@@ -198,7 +198,22 @@ async function FindFiles(args:any,context:vscode.ExtensionContext,app:AzureGitAp
 		
 		if (selected)
 		{
-			var terminal = vscode.window.createTerminal();
+			let terminal:vscode.Terminal;
+
+			if (app.downloadIntoVSCodeFolder)
+			{
+				terminal = vscode.window.createTerminal();
+			}
+			else
+			{
+				terminal = vscode.window.terminals[0];
+				if (!terminal){
+					//if no terminal is currently open then create a new one
+					terminal = vscode.window.createTerminal();
+				}
+			}
+			
+
 			terminal.show();
 			terminal.sendText(app.command1);
 			terminal.sendText(app.command2 + ' ' + selected.url);
