@@ -2,7 +2,7 @@
 	"name": "gitdownloadazurerepos",
 	"displayName": "Azure Git Repos",
 	"description": "Download your Git Code from Azure Repos",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"publisher": "neilbarkhina",
 	"license": "MIT",
 	"engines": {
@@ -58,17 +58,17 @@
 				"azuregit.settings.command1": {
 					"type": "string",
 					"default": "git init",
-					"description": "Customize the commands that run to download repo"
+					"description": "Customize the commands that run after selecing a repo. They will be run in the order: Command1, Command2, Command3"
 				},
 				"azuregit.settings.command2": {
 					"type": "string",
 					"default": "git remote add origin",
-					"description": "Customize the commands that run to download repo"
+					"description": "Customize the commands that run after selecing a repo. They will be run in the order: Command1, Command2, Command3"
 				},
 				"azuregit.settings.command3": {
 					"type": "string",
 					"default": "git pull origin master",
-					"description": "Customize the commands that run to download repo"
+					"description": "Customize the commands that run after selecing a repo. They will be run in the order: Command1, Command2, Command3"
 				},
 				"azuregit.settings.showStatusBar": {
 					"type": "boolean",
@@ -98,6 +98,8 @@
 		"@types/mocha": "^2.2.42"
 	},
 	"dependencies": {
-		"axios": "^0.18.0"
+		"axios": "^0.18.0",
+		"https-proxy-agent": ">=2.2.3",
+		"minimist": ">=0.2.1"
 	}
 }
