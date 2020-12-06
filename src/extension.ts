@@ -200,15 +200,41 @@ async function FindFiles(args:any,context:vscode.ExtensionContext,app:AzureGitAp
 		{
 			var terminal = vscode.window.createTerminal();
 			terminal.show();
-			terminal.sendText(replaceGitUrl(app.command1,selected.url));
-			terminal.sendText(replaceGitUrl(app.command2,selected.url));
-			terminal.sendText(replaceGitUrl(app.command3,selected.url));
+
+			//backwards compatibility with older versions
+			let oldVersion = isOldVersion(app);
+			if (oldVersion){
+				terminal.sendText(app.command1);
+				terminal.sendText(app.command2 + ' ' + selected.url);
+				terminal.sendText(app.command3);
+			}
+			else
+			{
+				terminal.sendText(replaceGitUrl(app.command1,selected.url));
+				terminal.sendText(replaceGitUrl(app.command2,selected.url));
+				terminal.sendText(replaceGitUrl(app.command3,selected.url));
+			}
+
+
 		}
 	}
 	else
 	{
 		commands.executeCommand('extension.azuregit.initialize');
 	}
+}
+
+/**
+ * Check if this is an older version which doesn't use {{URL}}
+ * in that case fall back to using the old commands for
+ * backwards compatibility
+ */
+function isOldVersion(app:AzureGitApp):boolean{
+	let isOld = true;
+	if (app.command1.indexOf('{{URL}}')>-1) isOld = false;
+	if (app.command2.indexOf('{{URL}}')>-1) isOld = false;
+	if (app.command3.indexOf('{{URL}}')>-1) isOld = false;
+	return isOld;
 }
 
 /**
