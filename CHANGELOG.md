@@ -5,6 +5,7 @@ All notable changes to the extension will be documented in this file.
 
 ## [Released]
 
+- 1.0.11 Better customization of URL in commands
 - 1.0.10 Upped versions of 3rd party libraries
 - 1.0.9 Can sort by date of last commit
 - 1.0.8 Added label and description to quickpick
