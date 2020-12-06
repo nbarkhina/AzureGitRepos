@@ -58,17 +58,17 @@
 				"azuregit.settings.command1": {
 					"type": "string",
 					"default": "git init",
-					"description": "Customize the commands that run after selecing a repo. They will be run in the order: Command1, Command2, Command3"
+					"description": "Customize the commands that run after selecing a repo. The URL will get filled in where you have {{URL}}. Commands are run in the order: Command1, Command2, Command3"
 				},
 				"azuregit.settings.command2": {
 					"type": "string",
-					"default": "git remote add origin",
-					"description": "Customize the commands that run after selecing a repo. They will be run in the order: Command1, Command2, Command3"
+					"default": "git remote add origin {{URL}}",
+					"description": "Customize the commands that run after selecing a repo. The URL will get filled in where you have {{URL}}. Commands are run in the order: Command1, Command2, Command3"
 				},
 				"azuregit.settings.command3": {
 					"type": "string",
 					"default": "git pull origin master",
-					"description": "Customize the commands that run after selecing a repo. They will be run in the order: Command1, Command2, Command3"
+					"description": "Customize the commands that run after selecing a repo. The URL will get filled in where you have {{URL}}. Commands are run in the order: Command1, Command2, Command3"
 				},
 				"azuregit.settings.showStatusBar": {
 					"type": "boolean",

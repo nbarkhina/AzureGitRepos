@@ -200,15 +200,26 @@ async function FindFiles(args:any,context:vscode.ExtensionContext,app:AzureGitAp
 		{
 			var terminal = vscode.window.createTerminal();
 			terminal.show();
-			terminal.sendText(app.command1);
-			terminal.sendText(app.command2 + ' ' + selected.url);
-			terminal.sendText(app.command3);
+			terminal.sendText(replaceGitUrl(app.command1,selected.url));
+			terminal.sendText(replaceGitUrl(app.command2,selected.url));
+			terminal.sendText(replaceGitUrl(app.command3,selected.url));
 		}
 	}
 	else
 	{
 		commands.executeCommand('extension.azuregit.initialize');
 	}
+}
+
+/**
+ * Replaces the {{URL}} in the command with the git url
+ */
+function replaceGitUrl(command:string,url:string):string{
+	let newString = command;
+	if (newString.indexOf('{{URL}}')>-1){
+		newString = newString.replace('{{URL}}',url);
+	}
+	return newString;
 }
 
 // this method is called when your extension is deactivated
