@@ -98,7 +98,7 @@
 		"@types/mocha": "^2.2.42"
 	},
 	"dependencies": {
-		"axios": "^0.18.0",
+		"axios": "^0.21.1",
 		"https-proxy-agent": ">=2.2.3",
 		"minimist": ">=0.2.1"
 	}
