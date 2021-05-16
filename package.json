@@ -2,11 +2,11 @@
 	"name": "gitdownloadazurerepos",
 	"displayName": "Azure Git Repos",
 	"description": "Download your Git Code from Azure Repos",
-	"version": "1.0.12",
+	"version": "1.0.13",
 	"publisher": "neilbarkhina",
 	"license": "MIT",
 	"engines": {
-		"vscode": "^1.28.0"
+		"vscode": "^1.37.0"
 	},
 	"bugs": {
 		"url": "https://github.com/nbarkhina/AzureGitRepos/issues",
@@ -92,7 +92,7 @@
 	},
 	"devDependencies": {
 		"typescript": "^3.3.1",
-		"vscode": "^1.1.28",
+		"vscode": "^1.1.37",
 		"tslint": "^5.12.1",
 		"@types/node": "^10.12.21",
 		"@types/mocha": "^2.2.42"
