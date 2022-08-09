@@ -7,6 +7,7 @@ export class AzureGitApp{
     command3:string = '';
     showStatusBar:boolean = true;
     sortByLastCommit:boolean = false;
+    resuseExistingTerminal:boolean = false;
 
     constructor(statusbar:vscode.StatusBarItem) {  
         this.statusBar = statusbar;
@@ -32,6 +33,7 @@ export class AzureGitApp{
         this.command3 = vscode.workspace.getConfiguration('azuregit.settings').get('command3') as string;
         this.showStatusBar = vscode.workspace.getConfiguration('azuregit.settings').get('showStatusBar') as boolean;
         this.sortByLastCommit = vscode.workspace.getConfiguration('azuregit.settings').get('sortByLastCommit') as boolean;
+        this.resuseExistingTerminal = vscode.workspace.getConfiguration('azuregit.settings').get('reuseTerminal') as boolean;
     }
     
 }

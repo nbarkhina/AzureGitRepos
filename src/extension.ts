@@ -198,9 +198,23 @@ async function FindFiles(args:any,context:vscode.ExtensionContext,app:AzureGitAp
 		
 		if (selected)
 		{
-			var terminal = vscode.window.createTerminal();
-			terminal.show();
+			var terminal:vscode.Terminal;
+			if (!app.resuseExistingTerminal)
+			{
+				terminal = vscode.window.createTerminal();
+			}
+			else
+			{
+				terminal = vscode.window.activeTerminal as vscode.Terminal;
+				if (terminal == null)
+				{
+					vscode.window.showErrorMessage("Azure Git Repos: No Active Terminal - Please open a terminal to the directory you want before selecting a repo.");
+					return;
+				}
+			}
 
+			terminal.show();
+			
 			//backwards compatibility with older versions
 			let oldVersion = isOldVersion(app);
 			if (oldVersion){

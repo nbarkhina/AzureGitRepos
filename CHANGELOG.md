@@ -5,6 +5,7 @@ All notable changes to the extension will be documented in this file.
 
 ## [Released]
 
+- 1.0.14 Reuse existing terminal option
 - 1.0.13 Upped versions of 3rd party libraries
 - 1.0.12 fixed backwards compatibility issue with new URL
 - 1.0.11 Better customization of URL in commands
