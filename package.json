@@ -110,6 +110,6 @@
 	"dependencies": {
 		"axios": "^0.21.2",
 		"https-proxy-agent": ">=2.2.3",
-		"minimist": ">=0.2.1"
+		"minimist": ">=1.2.6"
 	}
 }
