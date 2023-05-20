@@ -224,9 +224,9 @@ async function FindFiles(args:any,context:vscode.ExtensionContext,app:AzureGitAp
 			}
 			else
 			{
-				terminal.sendText(replaceGitUrl(app.command1,selected.url));
-				terminal.sendText(replaceGitUrl(app.command2,selected.url));
-				terminal.sendText(replaceGitUrl(app.command3,selected.url));
+				terminal.sendText(replaceGitUrl(app.command1,selected.url,app.insertPat,options.PAT));
+				terminal.sendText(replaceGitUrl(app.command2,selected.url,app.insertPat,options.PAT));
+				terminal.sendText(replaceGitUrl(app.command3,selected.url,app.insertPat,options.PAT));
 			}
 
 
@@ -254,11 +254,30 @@ function isOldVersion(app:AzureGitApp):boolean{
 /**
  * Replaces the {{URL}} in the command with the git url
  */
-function replaceGitUrl(command:string,url:string):string{
+function replaceGitUrl(command:string,url:string,insertPat:boolean,pat:string):string{
 	let newString = command;
+	
+	if (insertPat)
+	{
+		if (url.indexOf('@')>0){
+			let firstPart = url.substr(0,url.indexOf('@'));
+			let secondPart = url.substr(url.indexOf('@'));
+			url = firstPart + ':' + pat + secondPart;
+		}
+		else
+		{
+			if (url.startsWith('https://'))
+			{
+				let secondPart = url.substr(8);
+				url = 'https://user:' + pat + '@' + secondPart; 
+			}
+		}
+	}
+
 	if (newString.indexOf('{{URL}}')>-1){
 		newString = newString.replace('{{URL}}',url);
 	}
+
 	return newString;
 }
 

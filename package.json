@@ -2,7 +2,7 @@
 	"name": "gitdownloadazurerepos",
 	"displayName": "Azure Git Repos",
 	"description": "Download your Git Code from Azure Repos",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"publisher": "neilbarkhina",
 	"license": "MIT",
 	"engines": {
@@ -84,6 +84,11 @@
 					"type": "boolean",
 					"default": false,
 					"description": "Use existing terminal and directory when issuing git commands"
+				},
+				"azuregit.settings.insertPat": {
+					"type": "boolean",
+					"default": false,
+					"description": "Insert your PAT into the URL for authentication"
 				}
 			}
 		}
