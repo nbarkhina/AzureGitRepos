@@ -5,6 +5,7 @@ All notable changes to the extension will be documented in this file.
 
 ## [Released]
 
+- 1.0.16 Update title and branding
 - 1.0.15 Insert PAT option
 - 1.0.14 Reuse existing terminal option
 - 1.0.13 Upped versions of 3rd party libraries

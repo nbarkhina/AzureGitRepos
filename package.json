@@ -1,8 +1,8 @@
 {
 	"name": "gitdownloadazurerepos",
-	"displayName": "Azure Git Repos",
-	"description": "Download your Git Code from Azure Repos",
-	"version": "1.0.15",
+	"displayName": "Git Repos",
+	"description": "Download your Git Code from Azure DevOps",
+	"version": "1.0.16",
 	"publisher": "neilbarkhina",
 	"license": "MIT",
 	"engines": {
@@ -20,10 +20,10 @@
 		"Other"
 	],
 	"keywords": [
-		"azure repos",
 		"azure devops",
+		"azure repos",
 		"git",
-		"azure git repos"
+		"git repos"
 	],
 	"activationEvents": [
 		"*"
@@ -39,21 +39,21 @@
 			{
 				"command": "extension.azuregit.downloadRepo",
 				"title": "Download Repo",
-				"category": "Azure Git Repos"
+				"category": "Git Repos"
 			},
 			{
 				"command": "extension.azuregit.initialize",
 				"title": "Initialize",
-				"category": "Azure Git Repos"
+				"category": "Git Repos"
 			},
 			{
 				"command": "extension.azuregit.logout",
 				"title": "Logout",
-				"category": "Azure Git Repos"
+				"category": "Git Repos"
 			}
 		],
 		"configuration": {
-			"title": "Azure Git Configuration",
+			"title": "Git Repos Configuration",
 			"properties": {
 				"azuregit.settings.command1": {
 					"type": "string",
@@ -73,7 +73,7 @@
 				"azuregit.settings.showStatusBar": {
 					"type": "boolean",
 					"default": true,
-					"description": "Display Azure Git button on Status Bar"
+					"description": "Display Git Repos button on Status Bar"
 				},
 				"azuregit.settings.sortByLastCommit": {
 					"type": "boolean",

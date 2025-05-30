@@ -7,7 +7,7 @@ import Axios, { AxiosResponse } from 'axios';
 import { AzureGitApp } from './AzureGitApp';
 import { AzureGitOptions } from './AzureGitOptions';
 
-const SETUPMESSAGE = `$(gift) Setup Azure Git`;
+const SETUPMESSAGE = `$(gift) Setup Git Repos`;
 const DOWNLOADMESSAGE = `$(gift) Download Repo`;
 
 // this method is called when your extension is activated
@@ -108,13 +108,13 @@ async function FindFiles(args:any,context:vscode.ExtensionContext,app:AzureGitAp
 		}
 		catch(error)
 		{
-			vscode.window.showWarningMessage('Error Connecting -> Try command Azure Git Repos -> Initialize');
+			vscode.window.showWarningMessage('Error Connecting -> Try command Git Repos -> Initialize');
 			return;
 		}
 
 		if (projects.status!=200)
 		{
-			vscode.window.showWarningMessage('Error Connecting -> Try command Azure Git Repos -> Initialize');
+			vscode.window.showWarningMessage('Error Connecting -> Try command Git Repos -> Initialize');
 			return;
 		}
 		
@@ -208,7 +208,7 @@ async function FindFiles(args:any,context:vscode.ExtensionContext,app:AzureGitAp
 				terminal = vscode.window.activeTerminal as vscode.Terminal;
 				if (terminal == null)
 				{
-					vscode.window.showErrorMessage("Azure Git Repos: No Active Terminal - Please open a terminal to the directory you want before selecting a repo.");
+					vscode.window.showErrorMessage("Git Repos: No Active Terminal - Please open a terminal to the directory you want before selecting a repo.");
 					return;
 				}
 			}
