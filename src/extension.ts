@@ -2,8 +2,6 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { commands } from 'vscode';
-import https = require('https');
-import Axios, { AxiosResponse } from 'axios';
 import { AzureGitApp } from './AzureGitApp';
 import { AzureGitOptions } from './AzureGitOptions';
 
@@ -88,6 +86,22 @@ function convertCSharpDateTime(initialDate: any): Date {
     return myDate;
   }
 
+async function getAzureJson(url:string, pat:string): Promise<any> {
+    const patConverted = Buffer.from(':' + pat, 'binary').toString('base64');
+    const response = await fetch(url, {
+        headers: {
+            "Authorization": "Basic " + patConverted
+        }
+    });
+
+    if (!response.ok) {
+        const text = await response.text().catch(() => '');
+        throw new Error(`HTTP ${response.status} ${response.statusText} ${text}`);
+    }
+
+    return await response.json();
+}
+
 async function FindFiles(args:any,context:vscode.ExtensionContext,app:AzureGitApp){
 
 	app.refreshSettings();
@@ -97,22 +111,12 @@ async function FindFiles(args:any,context:vscode.ExtensionContext,app:AzureGitAp
 	{
 		console.log(options);
 
-		let pat_converted = new Buffer(':' + options.PAT, 'binary').toString('base64');
-
-		let projects:AxiosResponse;
+		let projects:any;
 		try
 		{
-			projects = await Axios.get('https://dev.azure.com/' + options.ORG + '/_apis/projects',{
-				headers:{"Authorization":"Basic " + pat_converted}
-			});
+			projects = await getAzureJson('https://dev.azure.com/' + options.ORG + '/_apis/projects', options.PAT);
 		}
 		catch(error)
-		{
-			vscode.window.showWarningMessage('Error Connecting -> Try command Git Repos -> Initialize');
-			return;
-		}
-
-		if (projects.status!=200)
 		{
 			vscode.window.showWarningMessage('Error Connecting -> Try command Git Repos -> Initialize');
 			return;
@@ -121,7 +125,7 @@ async function FindFiles(args:any,context:vscode.ExtensionContext,app:AzureGitAp
 
 		let allProjects:any[] = [];
 		
-		projects.data.value.forEach((item:any) => {
+		projects.value.forEach((item:any) => {
 			allProjects.push(
 				{
 					label: item.name,
@@ -136,7 +140,7 @@ async function FindFiles(args:any,context:vscode.ExtensionContext,app:AzureGitAp
 		var selectedProject = await vscode.window.showQuickPick(allProjects);
 		if (selectedProject)
 		{
-			projects.data.value.forEach((item:any) => {
+			projects.value.forEach((item:any) => {
 				if(item.name==selectedProject.label)
 					selectedProject = item.id;
 			});
@@ -144,19 +148,15 @@ async function FindFiles(args:any,context:vscode.ExtensionContext,app:AzureGitAp
 		else
 			return;
 	
-		let data = await Axios.get('https://dev.azure.com/' + options.ORG + '/' + selectedProject + '/_apis/git/repositories?api-version=5.0',{
-			headers:{"Authorization":"Basic " + pat_converted}
-		});
+		let data = await getAzureJson('https://dev.azure.com/' + options.ORG + '/' + selectedProject + '/_apis/git/repositories?api-version=5.0', options.PAT);
 		console.log(data);
 		let repos:any[] = [];
-		for(let i = 0;i<data.data.value.length;i++){
-			let item = data.data.value[i];
+		for(let i = 0;i<data.value.length;i++){
+			let item = data.value[i];
 			if (app.sortByLastCommit)
 			{
-				let commit_data = await Axios.get('https://dev.azure.com/' + options.ORG + '/' + selectedProject + '/_apis/git/repositories/' + item.id + '/commits?searchCriteria.$top=1&api-version=5.0',{
-					headers:{"Authorization":"Basic " + pat_converted}
-				});
-				let date = (commit_data as any).data.value[0].author.date;
+				let commit_data = await getAzureJson('https://dev.azure.com/' + options.ORG + '/' + selectedProject + '/_apis/git/repositories/' + item.id + '/commits?searchCriteria.$top=1&api-version=5.0', options.PAT);
+				let date = commit_data.value[0].author.date;
 				let dateObj = convertCSharpDateTime(date);
 				repos.push(
 					{
